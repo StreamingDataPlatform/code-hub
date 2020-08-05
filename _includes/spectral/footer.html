@@ -1,0 +1,23 @@
+<!-- Footer -->
+<footer id="footer">
+	<ul class="copyright">
+		<li> &copy; 2020
+			{% if site.owner %}{{ site.owner }}{% else %}{{ site.title }}{% endif %},
+			all rights reserved
+		</li>
+	</ul>
+	<ul class="copyright">
+		<li>
+			<a href="{{site.privacy_link}}" target="_blank">Privacy</a>
+		</li>
+		<li>
+			<a href="{{site.tou_link}}" target="_blank">Terms of Use</a>
+		</li>
+		<li>
+			<a tabindex="0" role="button" data-container="body" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="{{site.uoc}}">Use of Content</a>
+		</li>
+		<li>
+			<a href="{{site.third_link}}" target="_blank">Third Party Licenses</a>
+		</li>
+	</ul>
+</footer>

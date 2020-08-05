@@ -1,0 +1,12 @@
+{% if site.catalog %}
+    {% assign CATALOG = "" | split: "" %}
+    {% for category in site.catalog %}
+        {% for cate in site.categories %}
+            {% if cate[0] == category %}
+                {% assign CATALOG = CATALOG | push:cate %}
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+{% else %}
+    {% assign CATALOG = site.categories %}
+{% endif %}
