@@ -2,7 +2,7 @@
 #
 
 # Site settings
-baseurl: /workshop-samples # the subpath of your site, e.g. /blog
+baseurl: /code-hub # the subpath of your site, e.g. /blog
 
 title: SDP Code Hub
 description: |
@@ -36,4 +36,4 @@ catalog: ["Getting Started", "Ingesting Data", "Processing Data", "Data Output"]
 privacy_link: https://www.dell.com/learn/us/en/uscorp1/policies-privacy
 tou_link: https://www.dell.com/learn/us/en/uscorp1/site-terms-of-use
 uoc: All text instructions and source code within the posts on this site are free to use under the respective license stated within each post.
-third_link: https://github.com/pravega/workshop-samples/tree/gh-pages/3rd-party-licenses
+third_link: https://github.com/StreamingDataPlatform/code-hub/tree/master/3rd-party-licenses
