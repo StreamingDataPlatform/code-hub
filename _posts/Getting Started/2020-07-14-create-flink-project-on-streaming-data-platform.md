@@ -38,7 +38,7 @@ Apache Flink is the embedded analytics engine in the Dell EMC Streaming Data Pla
 **2.** Click **Create Flink Cluster** and complete the cluster configuration fields.
 ![Create-Flink-Cluster]({{site.baseurl}}/assets/heliumjk/images/post/flink-sdp-setup/create-flink-cluster.png)
 
-##### D. Upload aritifact to SDP
+##### D. Upload artifact to SDP
 ###### Option I: Using the Dell EMC Streaming Data Platform UI
 **1.** Navigate to **Analytics > Analytics Projects > *project-name* > Artifacts**
 ![Artifact-UI]({{site.baseurl}}/assets/heliumjk/images/post/flink-sdp-setup/artifact-ui.png)
