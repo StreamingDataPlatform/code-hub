@@ -84,45 +84,8 @@ In addition, since the code sample uses the default scope name, the **name/names
 
 
 ##### 3. Connect the `DataProducer`, `StreamBookmarker`, and `SliceProcessor` application with the Pravega stream on Dell EMC Streaming Data Platform
-After setting up the project namespace on SDP, configure Streaming Data Platform authentication by getting the ```keycloak.json``` file. Run the following command in your terminal: 
-```
-kubectl get secret examples-pravega -n examples -o jsonpath="{.data.keycloak\.json}" |base64 -d >  ${HOME}/keycloak.json
+After setting up the project namespace on SDP, configure Streaming Data Platform authentication by following [this post]({{site.baseurl}}/getting started/2020/08/14/Configure-off-cluster-pravega-clients.html). You need to set the same configurations for the `DataProducer`, `StreamBookmarker`, and `SliceProcessor` application. Then you can run the applications with the same order as discussed in the [original post](https://github.com/pravega/pravega-samples/tree/master/flink-connector-examples/doc/streamcuts).
 
-chmod go-rw ${HOME}/keycloak.json
-```
-The output should look like the following:
-```
-{
-  "realm": "nautilus",
-  "auth-server-url": "https://keycloak.p-test.nautilus-lab-wachusett.com/auth",
-  "ssl-required": "external",
-  "bearer-only": false,
-  "public-client": false,
-  "resource": "examples-pravega",
-  "confidential-port": 0,
-  "credentials": {
-    "secret": "c72c45f8-76b0-4ca2-99cf-1f1a03704c4f"
-  }
-}
-```
-In order to access the Pravega cluster from Dell EMC Streaming Data Platform, you need to connect with Pravega controller. Use `kubectl` to get the `EXTERNAL-IP` of the nautilus-pravega-controller service.
-```
-kubectl get service nautilus-pravega-controller -n nautilus-pravega
-
-NAME                          TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                          AGE
-nautilus-pravega-controller   LoadBalancer   10.100.200.243   11.111.11.111   10080:32217/TCP,9090:30808/TCP   6d5h
-```
-
-Before running the application, set the following environment variables. This can be done by setting the IntelliJ run configurations. (Go to run -> Edit Configurations -> Select DataProducer application -> Environment Variables -> click Browse icon. Fill the details mentioned below screen. Add all below program environment variables.) Make sure to change the `PRAVEGA_CONTROLLER` to the appropriate `EXTERNAL-IP` address. Notice that you may also need to set the same configurations for the `StreamBookmarker`, and `SliceProcessor` application.
-```
-pravega_client_auth_method=Bearer
-pravega_client_auth_loadDynamic=true
-KEYCLOAK_SERVICE_ACCOUNT_FILE=${HOME}/keycloak.json
-PRAVEGA_CONTROLLER=tcp://<pravega controller external-ip>:9090
-PRAVEGA_SCOPE=examples
-```
-
-Then you can save the configuration and run with the same order as discussed in the [github README](https://github.com/pravega/pravega-samples/tree/master/flink-connector-examples/doc/streamcuts). Make sure you are using the `EXTERNAL-IP` address you get from above steps for the `--controller` parameter.
 
 ##### 4. Check the result after running Streamcuts Flink example
 The result will be showing in your terminal or the console if you are using IntelliJ. You will find the same results as shown in the [github README](https://github.com/pravega/pravega-samples/tree/master/flink-connector-examples/doc/streamcuts).
