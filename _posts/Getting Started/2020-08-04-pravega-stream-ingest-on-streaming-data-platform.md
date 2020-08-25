@@ -28,15 +28,15 @@ The example consists of four applications: `EventWithTimestampWriter`, `EventWri
 All applications demonstrate the usage of EventStreamWriter to write an Event to Pravega and have identical ways to write the data to a Pravega stream on Dell EMC SDP. The critical part is in the `run()` method which creates a Stream and outputs the given Event to that Stream.
 
 ## Instructions
-##### 1. Follow the [this post]({{site.baseurl}}/getting started/2020/07/14/create-flink-project-on-streaming-data-platform.html) to learn how to create Flink projects and run on Dell EMC Streaming Data Platform
+##### 1. Refer to [this post]({{site.baseurl}}/getting started/2020/07/14/create-flink-project-on-streaming-data-platform.html), which was designed for Flink applications running on Dell EMC Streaming Data Platform. In order to write data to a stream, a scope/project must be created on SDP.
 
-The post for [Create Flink Project On Streaming Data Platform]({{site.baseurl}}/getting started/2020/07/14/create-flink-project-on-streaming-data-platform.html) was designed for the Flink application running on Dell EMC Streaming Data Platform. In order to write the data to a stream on SDP, you need to complete **Step A: Remove `createScope` method from the code** and **Step B. Create Flink Clusters** in the [post]({{site.baseurl}}/getting started/2020/07/14/create-flink-project-on-streaming-data-platform.html).
+To write the data to a stream on SDP, you need to complete **Step A: Remove `createScope` method from the code** and **Step B. Create Projects** in [this post]({{site.baseurl}}/getting started/2020/07/14/create-flink-project-on-streaming-data-platform.html).
 
 Notice that the **project name** you created will be **same** as the **Pravega scope/namespace** and will be used in the later steps. You should have an Analytics Project showing on your Dashboard as following (project name may vary): 
 ![streamcut-project]({{site.baseurl}}/assets/heliumjk/images/post/pravega-ingest/streamcut-project.png) 
 
 ##### 2. Connect the applications with the Pravega stream on Dell EMC Streaming Data Platform
-After setting up the project namespace on SDP, configure Streaming Data Platform authentication by following [this post]({{site.baseurl}}/getting started/2020/08/14/Configure-off-cluster-pravega-clients.html). You need to set the same configurations for the `JSONWriter`, `EventWithTimestampWriter`, `EventWriter`, and `ImageWritersor` application.
+After setting up the project namespace on SDP, configure Keycloak authentication by following [this post]({{site.baseurl}}/getting started/2020/08/14/Configure-off-cluster-pravega-clients.html). You need to set the same configurations for the `JSONWriter`, `EventWithTimestampWriter`, `EventWriter`, and `ImageWritersor` application.
 
 ##### 3. Check the result after running application
 The result will print in your terminal or the console if you are using IntelliJ. You will find the Bytes Written are showing up on the Pravega stream dashboard as following. 

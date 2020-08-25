@@ -94,7 +94,7 @@ Please also make sure to pass the same parameters as discussed in the [original 
 After finishing the above steps, the **State** for your Flink application should be shown as **Started**.
 
 ##### 3. Connect the `ExactlyOnceWriter` application with the Pravega stream on Dell EMC Streaming Data Platform
-After setting up the project namespace on SDP, configure Streaming Data Platform authentication by following [this post]({{site.baseurl}}/getting started/2020/08/14/Configure-off-cluster-pravega-clients.html). You need to set the same configurations for the `ExactlyOnceWriter` application. Then you can run the application in the same way as discussed in the [original post](https://github.com/pravega/pravega-samples/tree/master/flink-connector-examples/doc/exactly-once).
+After setting up the project namespace on SDP, configure Keycloak authentication by following [this post]({{site.baseurl}}/getting started/2020/08/14/Configure-off-cluster-pravega-clients.html). You need to set the same configurations for the `ExactlyOnceWriter` application. Then you can run the application in the same way as discussed in the [original post](https://github.com/pravega/pravega-samples/tree/master/flink-connector-examples/doc/exactly-once).
 
 ##### 4. Check the result after running exactly-once example
 Unlike the standalone mode, the result will not be showing in the console output. You need to access the pod's log by using `kubectl`. The following is an example of using the command (namespace may change based on your settings):
