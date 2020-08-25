@@ -114,7 +114,7 @@ The Main Class for creating the new app is ```io.pravega.example.flink.watermark
 After finishing the above steps, the **State** for your Flink application should be shown as **Started**.
 
 ##### 3. Connect the `PravegaWatermarkIngestion` application with the Pravega stream on Dell EMC Streaming Data Platform 
-After setting up the project namespace on SDP, configure Streaming Data Platform authentication by following [this post]({{site.baseurl}}/getting started/2020/08/14/Configure-off-cluster-pravega-clients.html). You need to set the same configurations for the `PravegaWatermarkIngestion` application. Then you can run the application in the same way as discussed in the [original post](https://github.com/pravega/pravega-samples/tree/master/flink-connector-examples/doc/watermark).
+After setting up the project namespace on SDP, configure Keycloak authentication by following [this post]({{site.baseurl}}/getting started/2020/08/14/Configure-off-cluster-pravega-clients.html). You need to set the same configurations for the `PravegaWatermarkIngestion` application. Then you can run the application in the same way as discussed in the [original post](https://github.com/pravega/pravega-samples/tree/master/flink-connector-examples/doc/watermark).
 
 
 ##### 4. Check the result after running watermark example

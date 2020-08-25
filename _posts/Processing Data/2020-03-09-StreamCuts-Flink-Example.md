@@ -84,7 +84,7 @@ In addition, since the code sample uses the default scope name, the **name/names
 
 
 ##### 3. Connect the `DataProducer`, `StreamBookmarker`, and `SliceProcessor` application with the Pravega stream on Dell EMC Streaming Data Platform
-After setting up the project namespace on SDP, configure Streaming Data Platform authentication by following [this post]({{site.baseurl}}/getting started/2020/08/14/Configure-off-cluster-pravega-clients.html). You need to set the same configurations for the `DataProducer`, `StreamBookmarker`, and `SliceProcessor` application. Then you can run the applications with the same order as discussed in the [original post](https://github.com/pravega/pravega-samples/tree/master/flink-connector-examples/doc/streamcuts).
+After setting up the project namespace on SDP, configure Keycloak authentication by following [this post]({{site.baseurl}}/getting started/2020/08/14/Configure-off-cluster-pravega-clients.html). You need to set the same configurations for the `DataProducer`, `StreamBookmarker`, and `SliceProcessor` application. Then you can run the applications with the same order as discussed in the [original post](https://github.com/pravega/pravega-samples/tree/master/flink-connector-examples/doc/streamcuts).
 
 
 ##### 4. Check the result after running Streamcuts Flink example
