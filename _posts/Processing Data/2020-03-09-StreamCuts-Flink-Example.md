@@ -1,8 +1,9 @@
 ---
 layout: post
 category: Processing Data
-tags: [stream processing, ingest, flink connector]
+tags: [stream processing, ingest, Flink connector]
 subtitle: To demo the usage of 'Streamcut'
+technologies: [SDP, Flink]
 img: ico-durability.png
 license: Apache
 support: Community

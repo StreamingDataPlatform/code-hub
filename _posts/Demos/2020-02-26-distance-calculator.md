@@ -1,8 +1,9 @@
 ---
 layout: post
 category: Demos
-tags: [pravega, flink, gateway, mqtt]
+tags: [Pravega, Flink, gateway, mqtt]
 subtitle: Dell EMC Streaming Data Analytics - Hands-on
+technologies: [SDP]
 img: post/distance calculator/architecture.png
 license: Apache
 support: Community
