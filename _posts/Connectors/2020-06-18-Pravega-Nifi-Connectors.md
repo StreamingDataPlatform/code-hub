@@ -1,8 +1,9 @@
 ---
 layout: post
 category: Connectors
-tags: [pravega, Nifi, connector]
+tags: [Pravega, Nifi, connector]
 subtitle: Enable Apache Nifi to read and write Pravega streams
+technologies: [Pravega, Nifi]
 img: nifilogo.jfif
 license: Apache
 support: Community

@@ -1,8 +1,9 @@
 ---
 layout: post
 category: Processing Data
-tags: [stream processing, ingest, flink connector]
+tags: [stream processing, ingest, Flink connector]
 subtitle: WordCountWriter and WordCountReader
+technologies: [Pravega, Flink]
 img: post/word count example/word-counter.jpg
 license: Apache
 support: Community

@@ -1,8 +1,9 @@
 ---
 layout: post
 category: "Getting Started"
-tags: [flink, java, SDP, Pravega]
+tags: [Flink, java, SDP, Pravega]
 subtitle: "Pravega Stream Ingest on Dell EMC Streaming Data Platform"
+technologies: [SDP, Pravega]
 img: pravega-stream.png
 license: Apache
 support: Community

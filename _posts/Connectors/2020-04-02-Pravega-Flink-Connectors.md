@@ -1,8 +1,9 @@
 ---
 layout: post
 category: Connectors
-tags: [pravega, flink, connector]
+tags: [Pravega, Flink, connector]
 subtitle: Enable Flink to read and write Pravega streams
+technologies: [Pravega, Flink]
 img: flink.jfif
 license: Apache
 support: Community

@@ -1,8 +1,9 @@
 ---
 layout: post
 category: "Getting Started"
-tags: [flink, java, SDP, Pravega]
+tags: [Flink, java, SDP, Pravega]
 subtitle: "Configure off-cluster Pravega clients on Dell EMC Streaming Data Platform"
+technologies: [SDP, Pravega]
 img: pravega-client.png
 license: Apache
 support: Community

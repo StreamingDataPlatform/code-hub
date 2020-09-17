@@ -1,8 +1,9 @@
 ---
 layout: post
 category: "Demos"
-tags: [pravega, java, ingest, Flink, CUDA, tensorflow]
+tags: [Pravega, java, ingest, Flink, CUDA, tensorflow]
 subtitle: Dell EMC Streaming Data Analytics - Hands-on
+technologies: [SDP]
 img: post/object detection/architecture.png
 license: Apache
 support: Community
