@@ -3,6 +3,7 @@ layout: post
 category: "Getting Started"
 tags: [flink, java, sdp, pravega]
 subtitle: "Create Projects and Flink Clusters on Dell EMC Streaming Data Platform"
+technologies: [SDP, Flink] 
 img: sdp.jpg
 license: Apache
 support: Community
@@ -44,18 +45,47 @@ You must have all your artifact available on the SDP maven repository. There are
 ![Upload-Artifact]({{site.baseurl}}/assets/heliumjk/images/post/flink-sdp-setup/upload-artifact.png)
 
 ###### Option B: Using the Gradle Build Tool
-**I.** Make the Maven repo in SDP available to your development workstation.
+**I.** Make the Maven repo in SDP available to your development workstation. Use `kubectl ingress` command to get the host and IP address for your namespace repo.
 ```
-kubectl port-forward service/repo 9090:80 --namespace project-name
+root@ubuntu:~$ kubectl get ingress -n your-namespace
+NAME   HOSTS                                ADDRESS        PORTS   AGE
+repo   repo.your-namespace.host.com       11.111.11.11      80     24h
 ```
 
-**II.** Add a publishing section to your `build.gradle` file. The standard `maven-publish` Gradle plugin must be added to the project in addition to a credentials section. You may also need to customize the publication identity, such as **groupId**, **artifactId**, and **version**. If you publish shadow JARs, make sure to add `classifier = ""` and `zip64 true` to the `shadowJar` config. The following is an example `build.gradle` file.
+Then find and open the `hosts` files which location, depending on the operating system that you are using, is: 
+- Windows - `C:\Windows\System32\drivers\etc\hosts`
+- Linux - `/etc/hosts`
+
+Use [`vim`](https://www.vim.org/), [`Sublime Text`](https://www.sublimetext.com/), or any other text editors to add the host and IP address information to the `hosts` file.  
+After this step, you should find a similar entry from your `hosts` file as following.   
+```
+root@ubuntu:~$ cat /etc/hosts
+    ...                           ...
+    ...                           ...  
+    ...                           ...          
+    ...                           ...
+11.111.11.11          repo.your-namespace.host.com
+```
+
+
+**II.** Add a publishing section to your `build.gradle` file. 
+
+The standard `maven-publish` Gradle plugin must be added to the project in addition to a credentials section. The following is an example `build.gradle` file.
+
+Make sure to change the `host` and `protocol` in url to the corresponding information you get from the above step. Depending on the port number, the url protocol is:
+- `80` : http
+- `443` : https 
+
+Then replace the default `username` and `password` with your credential information.   
+You may also need to customize the publication identity, such as **groupId**, **artifactId**, and **version**. If you publish shadow JARs, make sure to add `classifier = ""` and `zip64 true` to the `shadowJar` config. 
+
+
 ```
 apply plugin: "maven-publish"
 publishing {
     repositories {
         maven {
-            url = "http://localhost:9090/maven2"
+            url = "http://host/maven2"
             credentials {
             username "johndoe"
             password "**********"
