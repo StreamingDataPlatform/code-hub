@@ -1,7 +1,7 @@
 ---
 layout: post
 category: Connectors
-tags: [Pravega, Flink, connector]
+tags: [pravega, flink, connector]
 subtitle: Enable Flink to read and write Pravega streams
 technologies: [Pravega, Flink]
 img: flink.jfif

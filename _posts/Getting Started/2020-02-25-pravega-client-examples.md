@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "Getting Started"
-tags: [Pravega, java, pravega-client]
+tags: [pravega, java, pravega-client]
 subtitle: "Pravega Client Examples"
 img: pravega.png
 technologies: [Pravega]

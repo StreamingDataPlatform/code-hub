@@ -1,7 +1,7 @@
 ---
 layout: post
 category: Processing Data
-tags: [stream processing, ingest, Flink connector]
+tags: [stream processing, ingest, flink connector]
 subtitle: To demo how to use 'Watermark'
 technologies: [Pravega, Flink]
 img: ico-infinite.png
