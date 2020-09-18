@@ -52,7 +52,7 @@ NAME   HOSTS                                ADDRESS        PORTS   AGE
 repo   repo.your-namespace.host.com       11.111.11.11      80     24h
 ```
 
-Then find and open the `hosts` files which location, depending on the operating system that you are using, is: 
+If necessary, you may need to make changes to your `hosts` file. In order to so, find and open the `hosts` files which location, depending on the operating system that you are using, is: 
 - Windows - `C:\Windows\System32\drivers\etc\hosts`
 - Linux - `/etc/hosts`
 
@@ -72,7 +72,7 @@ root@ubuntu:~$ cat /etc/hosts
 
 The standard `maven-publish` Gradle plugin must be added to the project in addition to a credentials section. The following is an example `build.gradle` file.
 
-Make sure to change the `host` and `protocol` in url to the corresponding information you get from the above step. Depending on the port number, the url protocol is:
+Make sure to change the `url` to the corresponding information you get from the above step. Depending on the port number, the url protocol is:
 - `80` : http
 - `443` : https 
 
@@ -85,7 +85,7 @@ apply plugin: "maven-publish"
 publishing {
     repositories {
         maven {
-            url = "http://host/maven2"
+            url = "http://repo.your-namespace.host.com/maven2"
             credentials {
             username "johndoe"
             password "**********"
