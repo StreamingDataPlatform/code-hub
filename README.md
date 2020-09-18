@@ -52,7 +52,7 @@ layout: post
 category: Getting Started
 tags: [jekyll, code, markdown]
 subtitle: some subtitle
-technologies: [flink, pravega, etc] 
+technologies: [Flink, Pravega, etc] 
 license: Apache/MIT, etc
 support: Community/Commercial, etc
 img: image.jpg
@@ -71,9 +71,9 @@ some excerpt
 
 + **layout**: Set to ***post***.
 + **category**: Choose one of the following categories: ``Getting Started``, ``Ingesting Data``, ``Processing Data``, ``Data Output``, ``Demos``, ``Connectors``.
-+ **tags**: Put as many as are relevant. Tags will be shown on the Tags page.
++ **tags**: Put as many as are relevant. Tags will be shown on the Tags page. All tags must be lowercase.
 + **subtitle**: This will show beneath the title on the post details page.
-+ **technologies**: List what technologies(less or equal than 2) is used in this post. This will show on the right panel.
++ **technologies**: List what technologies(less or equal than 2) is used in this post. This will show on the right panel. The first letter of each technology should be capitalized. 
 + **license**: List what is the licence type of this post. This will show on the right panel.
 + **support**: List the support model of this post. This will show on the right panel.
 + **img**: Put the image in the path ``assets/heliumjk/images/`` and have the name here (prepend the folder name if put in a subfolder). It will show as thumbnail on the Catalog and All Posts pages, and the full version will show at the right of the title on the post details page.
