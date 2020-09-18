@@ -1,7 +1,7 @@
 ---
 layout: post
 category: Connectors
-tags: [Pravega, spark, connector]
+tags: [pravega, spark, connector]
 subtitle: Enable Spark to read and write Pravega streams
 technologies: [Pravega, Spark]
 img: spark.png

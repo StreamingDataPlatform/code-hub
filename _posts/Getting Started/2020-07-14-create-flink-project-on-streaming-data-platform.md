@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "Getting Started"
-tags: [Flink, java, SDP, Pravega]
+tags: [flink, java, sdp, pravega]
 subtitle: "Create Projects and Flink Clusters on Dell EMC Streaming Data Platform"
 img: sdp.jpg
 license: Apache

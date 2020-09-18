@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "Demos"
-tags: [Pravega, java, ingest, Flink]
+tags: [pravega, java, ingest, flink]
 subtitle: Dell EMC Streaming Data Analytics - Hands-on
 technologies: [SDP]
 img: post/video processing/architecture.png
