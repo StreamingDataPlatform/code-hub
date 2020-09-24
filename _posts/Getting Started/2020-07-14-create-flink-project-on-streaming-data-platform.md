@@ -75,10 +75,8 @@ The standard `maven-publish` Gradle plugin must be added to the project in addit
 Make sure to change the `url` to the corresponding information you get from the above step. Depending on the port number, the url protocol is:
 - `80` : http
 - `443` : https 
-
-Then replace the default `username` and `password` with your credential information.   
+   
 You may also need to customize the publication identity, such as **groupId**, **artifactId**, and **version**. If you publish shadow JARs, make sure to add `classifier = ""` and `zip64 true` to the `shadowJar` config. 
-
 
 ```
 apply plugin: "maven-publish"
@@ -87,8 +85,8 @@ publishing {
         maven {
             url = "http://repo.your-namespace.host.com/maven2"
             credentials {
-            username "johndoe"
-            password "**********"
+                username System.getenv("MAVEN_USER")
+                password System.getenv("MAVEN_PASSWORD")
             }
             authentication {
                 basic(BasicAuthentication)
@@ -107,7 +105,15 @@ publishing {
 }
 ```
 
-**III.** Use the Gradle Extension either from  IntelliJ IDEA or [Command-Line Interface](https://docs.gradle.org/current/userguide/command_line_interface.html) to publish the application JAR file to SDP.
+**III.** Set the environment variable for maven username and password.
+
+Replace the default `MAVEN_USER` and `MAVEN_PASSWORD` with the same credentials used to login to the SDP UI. And run following export command in your terminal.
+
+```
+export MAVEN_USER=johndoe  
+export MAVEN_PASSWORD=**********
+```
+**IV.** Use the Gradle Extension either from  IntelliJ IDEA or [Command-Line Interface](https://docs.gradle.org/current/userguide/command_line_interface.html) to publish the application JAR file to SDP.
 
 
 #####  4. Create Flink Clusters and Deploy Applications 
@@ -138,31 +144,48 @@ To use Helm Chart, you need to have a collection of files inside a directory. Th
 
 ```
 charts/               # A directory containing any charts upon which this chart depends
-    AplicationName/         # This structure will allow one application per cluster
-        Chart.yaml          # A YAML file containing information about the chart
-        values.yaml         # The default configuration values for this chart
+    ProjectName/         # This structure will allow one application per cluster
         templates/          # A directory of templates that, when combined with values,
                             # will generate valid Kubernetes manifest files.
 ```
-**III.** Add **FlinkCluster** and **application** `yaml` files to the `template` folder.  
-Next, you need to create template `yaml` files to generate manifest files on the Kubernetes cluster, combining with the configuration in `values.yaml`.
+**III.** Add `yaml` files to the Helm Chart file structure.  
+Next, follow the [workshop-sample repo](https://github.com/pravega/workshop-samples/tree/master/charts/) to add `yaml` files to your folder. You need to add  `Chart.yaml` and `values.yaml` into ProjectName folder. Then create two templates `yaml` files for `FlinkCluster`, and `FlinkApplication` which will generate manifest files on the Kubernetes cluster, combining with the configuration in `values.yaml`.
 
-The template folder in [workshop-sample repo](https://github.com/pravega/workshop-samples/tree/master/charts/templates) will give you a general idea for developing your template file. We highly recommend one application per cluster. Once the application has been developed and tested in isolation, advanced users can optimize resources by sharing clusters. Your chart file structure should look similar to the following when using one application per cluster.
+We highly recommend one application per cluster. To do so, make sure to add `spec.clusterSelector` section to your `FlinkApplication.yaml` files, limiting Flink Application to a Flink Cluster. Once the application has been developed and tested in isolation, advanced users can optimize resources by sharing clusters. Your chart file structure should look similar to the following when using one application per cluster.
+
 
 ```
 charts/              
-    TestApplication/
-        Chart.yaml          
-        values.yaml         
+    ProjectName/
+        Chart.yaml                          # A YAML file containing information about the chart
+        values.yaml                         # The default configuration values for this chart        
         templates/          
             FlinkCluster.yaml               # Template file for Flink Cluster
             FlinkApplication.yaml           # Template file for your application. 
-    ...
-    ...                                     # You can have multiple applications.
-    ...                     
 ```
 
-**IV.** Go to your project home directory  
+**IV.** Add values file for each application
+
+Besides setting the Flink cluster's values, we also need to configure the properties for the application. Create a folder named `values` under the project home directory. And follow the [workshop-sample repo](https://github.com/pravega/workshop-samples/tree/master/values) to add values `yaml` file for each application. You can configure many settings in this `yaml` file such as application parameters, mainClass name, maven coordinate, and so on. 
+
+After this step, you should have a `values` folder with all the values file for each of your application.    
+
+```
+charts/              
+    ProjectName/
+        Chart.yaml                          # A YAML file containing information about the chart
+        values.yaml                         # The default configuration values for this chart        
+        templates/          
+            FlinkCluster.yaml               # Template file for Flink Cluster
+            FlinkApplication.yaml           # Template file for your application. 
+values/
+    AplicationName.yaml                     # The configuration values for a specific application
+          ...        
+          ...                               # You can have multiple applications.
+          ...  
+```
+
+**V.** Go to your project home directory  
 Since all chart files have been organized into a structure under the `charts` folder, you need to visit the parent directory of `charts` folder in order to install or upgrade the Helm Chart to SDP. 
 
 Take the following structure as an example; after this step, you should locate inside the `FlinkApp` folder.
@@ -170,29 +193,42 @@ Take the following structure as an example; after this step, you should locate i
 ```
 FlinkApp/
     charts/              
-        TestApplication/
-            Chart.yaml          
-            values.yaml         
+        ProjectName/
+            Chart.yaml                          # A YAML file containing information about the chart
+            values.yaml                         # The default configuration values for this chart        
             templates/          
                 FlinkCluster.yaml               # Template file for Flink Cluster
                 FlinkApplication.yaml           # Template file for your application. 
-        ...
-        ...                                     # You can have multiple applications.
-        ...   
-    TestApplication/                 
+    values/
+        AplicationName.yaml                     # The configuration values for a specific application
+            ...        
+            ...                                 # You can have multiple applications.
+            ...             
 ```
 
-**V.**  Using **[Helm CLI](https://helm.sh/docs/intro/quickstart/)** to install or upgrade the charts  
+**VI.**  Using **[Helm CLI](https://helm.sh/docs/intro/quickstart/)** to install or upgrade the charts  
 
-Open the terminal window from the project home directory that you access from the above step. Then you can use [`helm upgrade`](https://helm.sh/docs/helm/helm_upgrade/) command to deploy your application and charts to SDP. 
+Open the terminal window from the project home directory that you access from the above step. Then you can use [`helm upgrade`](https://helm.sh/docs/helm/helm_upgrade/) command to deploy your application and charts to SDP. The benefit of using  [`helm upgrade`](https://helm.sh/docs/helm/helm_upgrade/) is that if a release by this name doesn't already exist, it will automatically run an install; otherwise, it will upgrade a release to a new version of a chart.
 
-The following are the command examples that will create a release name `jsonreader`. The benefit of using  [`helm upgrade`](https://helm.sh/docs/helm/helm_upgrade/) is that if a release by this name doesn't already exist, it will automatically run an install; otherwise, it will upgrade a release to a new version of a chart.
-
-
+Make sure to replace the `release name`, `path to project charts`, `namesapce`, and `path to application values file` with appropriate values.
 ```
-helm upgrade --install --timeout 600s jsonreader --wait --namespace workshop-samples charts
+./gradlew publish
+helm upgrade --install --timeout 600s --wait \
+    <release name> \
+    <path to project charts>  \
+    --namespace <namespace> \
+    -f <path to application values file>
 ```
 
+The following is an example that will create a release name `jsonreader` under `workshop-samples` namespace. 
+```
+./gradlew publish
+helm upgrade --install --timeout 600s --wait \
+    jsonreader \
+    charts/ProjectName  \
+    --namespace workshop-samples \
+    -f values/AplicationName.yaml 
+```
 
 ##### 5. Check Project Status
 **A.** Navigate to **Analytics > Analytics Projects > *project-name***. Use the links at the top of the project dashboard to view Apache Flink clusters, applications, and artifacts associated with the project.
