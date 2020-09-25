@@ -113,6 +113,7 @@ Replace the default `MAVEN_USER` and `MAVEN_PASSWORD` with the same credentials 
 export MAVEN_USER=johndoe  
 export MAVEN_PASSWORD=**********
 ```
+
 **IV.** Use the Gradle Extension either from  IntelliJ IDEA or [Command-Line Interface](https://docs.gradle.org/current/userguide/command_line_interface.html) to publish the application JAR file to SDP.
 
 
@@ -210,7 +211,7 @@ FlinkApp/
 
 Open the terminal window from the project home directory that you access from the above step. Then you can use [`helm upgrade`](https://helm.sh/docs/helm/helm_upgrade/) command to deploy your application and charts to SDP. The benefit of using  [`helm upgrade`](https://helm.sh/docs/helm/helm_upgrade/) is that if a release by this name doesn't already exist, it will automatically run an install; otherwise, it will upgrade a release to a new version of a chart.
 
-Make sure to replace the `release name`, `path to project charts`, `namesapce`, and `path to application values file` with appropriate values.
+Make sure to replace the `release name`, `path to project charts`, `namespace`, and `path to application values file` with appropriate values.
 ```
 ./gradlew publish
 helm upgrade --install --timeout 600s --wait \
