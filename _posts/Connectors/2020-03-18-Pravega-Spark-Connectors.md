@@ -137,11 +137,12 @@ ls -lhR ~/.m2/repository/io/pravega/pravega-connectors-spark
 
 3) Running Examples
 
-`spark-connector-examples` repository provides code to connect Spark with Pravega. It has multiple examples demonstrating use cases for spark jobs with Pravega.
+`spark-connector-examples` repository in the source provides code to connect Spark with Pravega. It has multiple examples demonstrating use cases for spark jobs with Pravega.
  
 ## Source
-[https://github.com/pravega/spark-connectors](https://github.com/pravega/spark-connectors)
-[]
+- spark-connectors: [https://github.com/pravega/spark-connectors](https://github.com/pravega/spark-connectors)
+
+- spark-connector-examples: [https://github.com/pravega/spark-connector-examples](https://github.com/pravega/spark-connector-examples)
 
 ## Documentation
 
