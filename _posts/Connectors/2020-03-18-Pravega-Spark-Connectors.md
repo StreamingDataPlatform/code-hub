@@ -67,8 +67,81 @@ cd spark-connectors
 ls -lhR ~/.m2/repository/io/pravega/pravega-connectors-spark
 ```
 
+## Samples
+
+Set of code examples to demonstrate the capabilities of Pravega as a data stream storage system for Apache Spark.
+
+### Getting Started
+
+#### Install Operating System
+
+Install Ubuntu 18.04 LTS. Other operating systems can also be used but the commands below have only been tested on this version.
+
+#### Install Java 8
+
+```
+apt-get install openjdk-8-jdk
+```
+
+#### Install Docker and Docker Compose
+
+See [https://docs.docker.com/install/linux/docker-ce/ubuntu/](https://docs.docker.com/install/linux/docker-ce/ubuntu/) and [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/).
+
+#### Run Pravega
+
+This will run a development instance of Pravega locally. Note that the default standalone Pravega used for development is likely insufficient for testing video because it stores all data in memory and quickly runs out of memory. Using the procedure below, all data will be stored in a small HDFS cluster in Docker.
+
+In the command below, replace x.x.x.x with the IP address of a local network interface such as eth0.
+
+```
+cd
+git clone https://github.com/pravega/pravega
+cd pravega
+git checkout r0.7
+cd docker/compose
+export HOST_IP=x.x.x.x
+docker-compose up -d
+```
+
+You can view the Pravega logs with `docker-compose logs --follow`. You can view the stream files stored on HDFS with `docker-compose exec hdfs hdfs dfs -ls -h -R /`.
+
+#### Instructions
+
+1) Install Apache Spark
+
+This will install a development instance of Spark locally.
+
+Download `https://www.apache.org/dyn/closer.lua/spark/spark-2.4.6/spark-2.4.6-bin-hadoop2.7.tgz`.
+
+```
+mkdir -p ~/spark
+cd ~/spark
+tar -xzvf ~/Downloads/spark-2.4.6-bin-hadoop2.7.tgz
+ln -s spark-2.4.6-bin-hadoop2.7 current
+export PATH="$HOME/spark/current/bin:$PATH"
+```
+
+By default, the script run_spark_ap.sh will use an in-process Spark mini-cluster that is started with the Spark job ("--master local[2]").
+
+2) Build and Install the Spark Connector
+
+This will build the Spark Connector and publish it to your local Maven repository.
+
+```
+cd
+git clone https://github.com/pravega/spark-connectors
+cd spark-connectors
+./gradlew install
+ls -lhR ~/.m2/repository/io/pravega/pravega-connectors-spark
+```
+
+3) Running Examples
+
+`spark-connector-examples` repository provides code to connect Spark with Pravega. It has multiple examples demonstrating use cases for spark jobs with Pravega.
+ 
 ## Source
 [https://github.com/pravega/spark-connectors](https://github.com/pravega/spark-connectors)
+[]
 
 ## Documentation
 
