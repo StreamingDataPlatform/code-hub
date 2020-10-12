@@ -19,7 +19,7 @@ exclude: ["README.md", "changelog.md"]
 
 # paginate setting for all blogs page
 paginate: 10
-paginate_path: "blog/page:num"
+paginate_path: "all-posts/page:num"
 
 # make sure you have this gem installed to dev locally
 # `$ gem install jekyll-paginate`

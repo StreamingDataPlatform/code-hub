@@ -166,3 +166,80 @@ div.popover * {
 .card-read-more {
     padding: 5px 15px 15px;
 }
+
+/* overwrite main.css */
+.hero-content-v2 h3 {
+    font-size: 24px;
+    color: #2f3542;
+    font-weight: 400;
+    margin-bottom: 25px;
+}
+.hero-content-v2 h3 strong {
+    display: block;
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 62px;	
+}
+.carousel-post {
+    margin-right: 15px;
+    background-color: #f7f7f7;
+}
+.pagination .page-item .page-link {
+    color: #EB586F;
+}
+.pagination .page-item.disabled .page-link {
+    color: #636c72;
+}
+.pagination .page-item.disabled.static .page-link {
+    color: #EB586F;
+}
+@media (max-width: 480px) {
+    .navbar-brand img {
+        max-width: 120px;
+    }
+    .container .navbar-toggler {
+        padding: 15px 15px!important;
+    }
+}
+@media (max-width:767px) {
+    .container {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+    }
+    .container .navbar-toggler {
+        position:  absolute;
+        right: 0px;
+        padding: 25px 15px;
+        margin:  10px;
+    }
+}
+.mb-25 {
+    margin-bottom: 25px;
+}
+.div-catalog-img {
+    overflow: hidden;
+    max-height: 150px;
+}
+.div-blog-img {
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.div-img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+}
+.text-version {
+    color: #fff;
+    background-color: #555;
+    padding: 1px 6px;
+    border-radius: 5px;
+}
+[role="button"]:focus {
+    outline: none;
+}
