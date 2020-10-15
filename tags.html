@@ -69,13 +69,13 @@ navorder: 4
                             <h2 class="post-title">
                                 {{ _article.title }}
                             </h2>
-                            {% if _article.excerpt %}
                         </a>
+                        {% if _article.excerpt %}
                         <h3 class="post-subtitle">
                             {{ _article.excerpt }}
                         </h3>
-                        <i class="text-muted">Posted on {{ _article.date | date_to_string }} in category <a href="#">{{_article.category}}</a></i>
                         {% endif %}
+                        <i class="text-muted">Posted on {{ _article.date | date_to_string }} in category <a href="#">{{_article.category}}</a></i>
                         <hr>
                     </div>
                 {% endfor %}

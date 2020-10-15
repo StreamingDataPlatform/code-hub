@@ -14,27 +14,28 @@ title: Posts
         <div class="row">
             <div class="col-sm-12 col-md-9">
                 {% for post in paginator.posts %}
-                <div class="blog-block post-content-area">
-                    <div class="div-blog-img">
-                        {% assign img_source = post.img %}
-                        {% include JB/post_img %}
-                        <img class="div-img" src="{{ post_img }}" alt="{{ post.title }} image">
+
+                <div class="row">
+                    <div class="col-12 col-sm-3">
+                        <div class="div-blog-img">
+                            {% assign img_source = post.img %}
+                            {% include JB/post_img %}
+                            <img class="div-img" src="{{ post_img }}" alt="{{ post.title }} image">
+                        </div>
                     </div>
-                    <div class="blog-post">
-                        <h3 class="mb-1">
-                            <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+                    <div class="col-12 col-sm-9 post-preview">
+                        <a href="{{ site.baseurl }}{{ post.url }}">
+                            <h2 class="post-title my-2">
+                                {{ post.title }}
+                            </h2>
+                        </a>
+                        <h3 class="post-subtitle">
+                            {{ post.excerpt }}
                         </h3>
-                        {% if post.license %}
-                        <span class="mr-3 text-default" tabindex="1" role="button" data-container="body" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="The author of this post has indicated that the license provided with the source code is {{ post.license }}."><i class="fa fa-file-text-o" aria-hidden="true"></i> {{ post.license }} </span>
-                        {% endif %} 
-                        {% if post.support %} 
-                        <span class="text-default" tabindex="2" role="button" data-container="body" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="The source code referenced by this post is {{post.support}} supported. If you have an issue, you should report it to the original developer[s] through the project's code repository."><i class="fa fa-user-o" aria-hidden="true"></i> {{ post.support }} </span>
-                        {% endif %} 
-                        <p>{{ post.excerpt }}</p>
-                        <a class="btn btn-common" href="{{ site.baseurl }}{{ post.url }}">Read More</a>
+                        <i class="text-muted">Posted on {{ post.date | date_to_string }} in category <a href="#">{{post.category}}</a></i>
                     </div>
                 </div>
-                <div class="mb-60"></div>
+                <hr>
                 {% endfor %}
 
                 <!-- Pagination links -->
