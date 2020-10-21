@@ -34,10 +34,10 @@ All of these processors allow for concurrency in a NiFi cluster or a standalone 
 [https://github.com/pravega/nifi-pravega](https://github.com/pravega/nifi-pravega)
 
 ## Documentation
-To learn more about how to build and use the Flink Connector library, follow the connector documentation [here](http://pravega.io/).
+To learn more about how to build and use the NiFi Connector library, follow the connector documentation [here](https://github.com/pravega/nifi-pravega#building).
 
-More examples on how to use the connectors with Flink application can be found in [Pravega Samples](https://github.com/pravega/nifi-pravega) repository.
+More information on NiFi can be found in the [NiFi User's Guide](https://nifi.apache.org/docs/nifi-docs/html/user-guide.html).
 
 ## License
-Flink connectors for Pravega is 100% open source and community-driven. All components are available
+NiFi connectors for Pravega are 100% open source and community-driven. All components are available
 under [Apache 2 License](https://www.apache.org/licenses/LICENSE-2.0.html) on GitHub.
