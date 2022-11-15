@@ -36,7 +36,7 @@ This post demos how to make a distance calculator on Streaming Data Platform
 ### Workload Flow
 1. We fully utilize SDP platform from start to end
 2. Collect Distance sensor data via a MQTT Sensor or Use simulator to generate the data from one CSV file and write into one MQTT topic
-3. Which further writes it into the Pravega Stream via Pravega Writr API
+3. Which further writes it into the Pravega Stream via Pravega Writer API
 4. Flink Job read the data from stream using Pravega Reader API
 5. Computing and processing in each fixed 3 time window
 6. Sink to Influx DB
