@@ -45,20 +45,46 @@ This post demos how to make a distance calculator on Streaming Data Platform
 
 
 ### Prerequisites
-- Clone [sdp-starter-kit](https://github.com/Vi-Nk/sdp-starter-kit)
+- Clone [sdp-starter-kit](https://github.com/vangork/sdp-starter-kit)
 - [Java 11](https://www.oracle.com/java/technologies/downloads/#java11)
 - [Maven 3.6.3](https://archive.apache.org/dist/maven/maven-3/3.6.3/)
+- [Helm](https://helm.sh/docs/intro/install/)
 - SDP Running in a Cluster
 - Flink 1.15.2 runtime
 
-### Compile distance-calculator project
+## Install using helm chart
+```
+cd sdp-starter-kit/distance-calculator/charts/
+```
+- Edit and replace **flinkImage** variable in **calculator/values.yaml** with flink 1.15.2 runtime image name
+```
+kubectl get runtimeimages -A
+```
+![setup15]({{site.baseurl}}/assets/heliumjk/images/post/distance-calculator-sdp/setup15.png)
+
+- Edit and replace **chartVersion** variable in **features/values.yaml** with tag
+```
+kubectl get projectfeature pravegamqttbroker -o jsonpath='{.spec.templates.pravegaMQTTBroker}'
+```
+![setup16]({{site.baseurl}}/assets/heliumjk/images/post/distance-calculator-sdp/setup16.png)
+- Install distance-calculator and mqtt-writer 
+```
+helm install features features/
+helm install calculator calculator/
+helm install mqttwriter mqttwriter/
+```
+- To visualize skip to **Get Influxdb Data Source** and **Adding Dashboard in Grafana**
+
+## Manual Install
+
+#### Compile distance-calculator project
 - Use below command to package and create jar file
     ```
     cd distance-calculator
     mvn clean package
     ```
 
-### Setup SDP 
+#### Setup SDP 
 - Navigate to **Analytics**
 - Click on **New Project**
 - Select **Artifact Repository**, **Metrics**, **Pravega MQTT Broker**, **Zookeeper** from the **Features** dropdown
@@ -76,13 +102,13 @@ This post demos how to make a distance calculator on Streaming Data Platform
 ![setup5]({{site.baseurl}}/assets/heliumjk/images/post/distance-calculator-sdp/setup5.png)
 - Upload the jar file from –> /<Project_Path>/distance-calculator/calculator/target/calculator-1.0.0.jar
 
-### Create Flink Cluster
+#### Create Flink Cluster
 - Navigate to **Analytics** → **Your Project** → **Flink** → **Create Flink Cluster**
 ![setup6]({{site.baseurl}}/assets/heliumjk/images/post/distance-calculator-sdp/setup6.png)
 - Select Flink version 1.15.2 and Click **Save** to create Flink Cluster
 ![setup7]({{site.baseurl}}/assets/heliumjk/images/post/distance-calculator-sdp/setup7.png)
 
-### Run Flink application
+#### Run Flink application
 - Click **File** 
 - Select **Main Application** from dropdown
 - Type main class as **io.pravega.flinkapp.DistanceCalculator**
@@ -90,7 +116,7 @@ This post demos how to make a distance calculator on Streaming Data Platform
 - Click **Create** and wait for the app to Start 
 ![setup8]({{site.baseurl}}/assets/heliumjk/images/post/distance-calculator-sdp/setup8.png)
 
-### Set the Environment variables
+#### Set the Environment variables
 - **Note**: -  Edit **Distance.csv** and replace with current dates (To avoid retention policy error-- DATA is only valid for 7 days)
 Below Image shows replacing of dates to Today's date
 ![setup4]({{site.baseurl}}/assets/heliumjk/images/post/distance-calculator-sdp/setup4.png)
@@ -113,7 +139,7 @@ Below Image shows replacing of dates to Today's date
     export MQTT_PASSWORD=<MQTT_PASSWORD>
     ```
 
-### Simulate the MQTT writer
+#### Simulate the MQTT writer
 - Use below command to run MQTT writer simulator
     ```
     java -jar mqtt-writer\target\mqtt-writer-1.0.0.jar
@@ -139,4 +165,4 @@ Below Image shows replacing of dates to Today's date
 ![setup14]({{site.baseurl}}/assets/heliumjk/images/post/distance-calculator-sdp/setup14.png)
 
 ## Source
-[https://github.com/Vi-Nk/sdp-starter-kit/tree/master/distance-calculator](https://github.com/Vi-Nk/sdp-starter-kit/tree/master/distance-calculator)
+[https://github.com/vangork/sdp-starter-kit/tree/master/distance-calculator](https://github.com/vangork/sdp-starter-kit/tree/master/distance-calculator)
