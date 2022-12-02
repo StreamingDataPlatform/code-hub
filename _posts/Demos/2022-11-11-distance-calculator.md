@@ -71,14 +71,14 @@ kubectl get projectfeature pravegamqttbroker --output="jsonpath={.spec.templates
 ```
 ![setup16]({{site.baseurl}}/assets/heliumjk/images/post/distance-calculator-sdp/setup16.png)
 
-  Update **chartVersion** variable in **features/values.yaml** with **spec.chart.spec.tag**.
+  Update **chartVersion** variable in **features/values.yaml** with **spec.values.image.tag**.
 - Deploy distance-calculator and mqtt-writer by running below script.
 ```
 ./deploy.sh <name_of_the_application>
 ```
   ex:- ./deploy.sh distance-calculator
 
-  wait few min until flink application starts
+  Wait for few minutes until flink application starts
 - To visualize dashboard navigate to **Analytics** → **Your Project** → **Features**
 - Open **Metrics** endpoint
 ![setup11]({{site.baseurl}}/assets/heliumjk/images/post/distance-calculator-sdp/setup11.png)
