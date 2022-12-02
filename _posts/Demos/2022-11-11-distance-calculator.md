@@ -89,6 +89,9 @@ kubectl get projectfeature pravegamqttbroker --output="jsonpath={.spec.templates
 - Below view can be observed
 ![setup14]({{site.baseurl}}/assets/heliumjk/images/post/distance-calculator-sdp/setup14.png)
 
+  **Note:-** In case if you don't see any graph or button to **Zoom to Data**, Apply the time range of 10:37:00 to 11:00:00 for the current date
+![setup18]({{site.baseurl}}/assets/heliumjk/images/post/distance-calculator-sdp/setup18.png)
+
 ### Setup distance calculator demo manually
 
 ##### 1. Compile distance-calculator project
