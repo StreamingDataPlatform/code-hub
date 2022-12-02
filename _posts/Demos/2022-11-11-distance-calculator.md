@@ -52,39 +52,56 @@ This post demos how to make a distance calculator on Streaming Data Platform
 - SDP Running in a Cluster
 - Flink 1.15.2 runtime
 
-### Install using Helm chart
+### Setup distance calculator demo using Helm
+- The Helm charts for distance calculator demo is in
 ```
 cd sdp-starter-kit/distance-calculator/charts/
 ```
-- Edit and replace **flinkImage** variable in **calculator/values.yaml** with flink 1.15.2 runtime image name
+- Get all available runtime images using the below command.
 ```
 kubectl get runtimeimages -A
 ```
 ![setup15]({{site.baseurl}}/assets/heliumjk/images/post/distance-calculator-sdp/setup15.png)
 
-- Edit and replace **chartVersion** variable in **features/values.yaml** with tag
+  Update **flinkImage** variable in **calculator/values.yaml** with the runtime image name available for the flink version 1.15.2. 
+
+- Get **spec.values.image.tag** using below command.
 ```
-kubectl get projectfeature pravegamqttbroker -o jsonpath='{.spec.templates.pravegaMQTTBroker}'
+kubectl get projectfeature pravegamqttbroker --output="jsonpath={.spec.templates.pravegaMQTTBroker}"
 ```
 ![setup16]({{site.baseurl}}/assets/heliumjk/images/post/distance-calculator-sdp/setup16.png)
-- Install distance-calculator and mqtt-writer 
-```
-helm install features features/
-helm install calculator calculator/
-helm install mqttwriter mqttwriter/
-```
-- To visualize the grafana dashboard go to section **Get Influxdb Data Source** and **Adding Dashboard in Grafana**
 
-### Manual Install
+  Update **chartVersion** variable in **features/values.yaml** with **spec.values.image.tag**.
+- Deploy distance-calculator and mqtt-writer by running below script.
+```
+./deploy.sh <name_of_the_application>
+```
+  ex:- ./deploy.sh distance-calculator
 
-##### Compile distance-calculator project
+  Wait for few minutes until flink application starts
+- To visualize dashboard navigate to **Analytics** → **Your Project** → **Features**
+- Open **Metrics** endpoint
+![setup11]({{site.baseurl}}/assets/heliumjk/images/post/distance-calculator-sdp/setup11.png)
+- Hover on **Dashboard** and Click on **Manage**
+![setup12]({{site.baseurl}}/assets/heliumjk/images/post/distance-calculator-sdp/setup12.png)
+- Click on **Distance Calculataor Dashboard**
+![setup17]({{site.baseurl}}/assets/heliumjk/images/post/distance-calculator-sdp/setup17.png)
+- Below view can be observed
+![setup14]({{site.baseurl}}/assets/heliumjk/images/post/distance-calculator-sdp/setup14.png)
+
+  **Note:-** In case if you don't see any graph or button to **Zoom to Data**, Apply the time range of 10:37:00 to 11:00:00 for the current date
+![setup18]({{site.baseurl}}/assets/heliumjk/images/post/distance-calculator-sdp/setup18.png)
+
+### Setup distance calculator demo manually
+
+##### 1. Compile distance-calculator project
 - Use below command to package and create jar file
     ```
     cd distance-calculator
     mvn clean package
     ```
 
-##### Setup SDP 
+##### 2. Setup SDP 
 - Navigate to **Analytics**
 - Click on **New Project**
 - Select **Artifact Repository**, **Metrics**, **Pravega MQTT Broker**, **Zookeeper** from the **Features** dropdown
@@ -102,13 +119,13 @@ helm install mqttwriter mqttwriter/
 ![setup5]({{site.baseurl}}/assets/heliumjk/images/post/distance-calculator-sdp/setup5.png)
 - Upload the jar file from –> /<Project_Path>/distance-calculator/calculator/target/calculator-1.0.0.jar
 
-##### Create Flink Cluster
+##### 3. Create Flink Cluster
 - Navigate to **Analytics** → **Your Project** → **Flink** → **Create Flink Cluster**
 ![setup6]({{site.baseurl}}/assets/heliumjk/images/post/distance-calculator-sdp/setup6.png)
 - Select Flink version 1.15.2 and Click **Save** to create Flink Cluster
 ![setup7]({{site.baseurl}}/assets/heliumjk/images/post/distance-calculator-sdp/setup7.png)
 
-##### Run Flink application
+##### 4. Run Flink application
 - Click **File** 
 - Select **Main Application** from dropdown
 - Type main class as **io.pravega.flinkapp.DistanceCalculator**
@@ -116,7 +133,7 @@ helm install mqttwriter mqttwriter/
 - Click **Create** and wait for the app to Start 
 ![setup8]({{site.baseurl}}/assets/heliumjk/images/post/distance-calculator-sdp/setup8.png)
 
-##### Set the Environment variables
+##### 5. Set the Environment variables
 - **Note**: -  Edit **Distance.csv** and replace with current dates (To avoid retention policy error-- DATA is only valid for 7 days)
 Below Image shows replacing of dates to Today's date
 ![setup4]({{site.baseurl}}/assets/heliumjk/images/post/distance-calculator-sdp/setup4.png)
@@ -139,20 +156,20 @@ Below Image shows replacing of dates to Today's date
     export MQTT_PASSWORD=<MQTT_PASSWORD>
     ```
 
-##### Simulate the MQTT writer
+##### 6. Simulate the MQTT writer
 - Use below command to run MQTT writer simulator
     ```
     java -jar mqtt-writer\target\mqtt-writer-1.0.0.jar
     ```
 
-##### Get Influxdb Data Source
+##### 7. Get Influxdb Data Source
 - Navigate to **Analytics** → **Your Project** → **Features**
 ![setup9]({{site.baseurl}}/assets/heliumjk/images/post/distance-calculator-sdp/setup9.png)
 - Go to Setting → **Data Source** and  Get Influxdb Data Source name and copy **data_souce_name** (disatanceflink_flnk in below image)
 ![setup10]({{site.baseurl}}/assets/heliumjk/images/post/distance-calculator-sdp/setup10.png)
 - Edit dashboard.json and replace **datasource** value from ***test_flnk*** to **data_souce_name**
 
-##### Adding Dashboard in Grafana
+##### 8. Adding Dashboard in Grafana
 - Navigate to **Analytics** → **Your Project** → **Features**
 - Open **Metrics** endpoint
 ![setup11]({{site.baseurl}}/assets/heliumjk/images/post/distance-calculator-sdp/setup11.png)
