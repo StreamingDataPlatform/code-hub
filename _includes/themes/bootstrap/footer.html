@@ -55,12 +55,16 @@
                 </h3>
                 <div class="blog-posts-small">
                     {% for post in site.posts limit:3 %}
-                    <div class="blog-post-small first-post">
+                    <div class="blog-post-small" style="display: flex;">
                         {% assign img_source = post.img %}
                         {% include JB/post_img %}
-                        <img src="{{ post_img }}" alt="">
-                        <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-                        <p>Posted on <a href="#" class="post-date">{{post.date | date_to_string}}</a></p>
+                        <div style="flex-basis: 35%; flex-grow: 0; flex-shrink: 0;">
+                            <img src="{{ post_img }}" alt="">
+                        </div>
+                        <div style="margin-left: 10px;">
+                            <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+                            <p>Posted on <a href="#" class="post-date">{{post.date | date_to_string}}</a></p>
+                        </div>
                     </div>
                     {% endfor %}
                 </div>
