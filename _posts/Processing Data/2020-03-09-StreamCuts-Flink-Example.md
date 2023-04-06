@@ -81,7 +81,7 @@ III. ```pravega-samples/flink-connector-examples/src/main/java/io/pravega/exampl
 The post for [Create Flink Project On Streaming Data Platform]({{site.baseurl}}/getting started/2020/07/14/create-flink-project-on-streaming-data-platform.html) was designed for the Flink application running on Dell EMC Streaming Data Platform. Since this code sample only needs the Pravega cluster from the Dell EMC Streaming Data Platform, you can **skip Step C: Create Flink Clusters** through **Step F. Check Project Status** in the [post]({{site.baseurl}}/getting started/2020/07/14/create-flink-project-on-streaming-data-platform.html).
 
 In addition, since the code sample uses the default scope name, the **name/namespace** for this project **must** be ```examples```. You should have the same Analytics Projects Dashboard as follows: 
-![streamcut-project]({{site.baseurl}}/assets/heliumjk/images/post/streamcut/streamcut-project.png) 
+![streamcut-project]({{site.baseurl}}/assets/images/posts/streamcut/streamcut-project.png) 
 
 
 ##### 3. Connect the `DataProducer`, `StreamBookmarker`, and `SliceProcessor` application with the Pravega stream on Dell EMC Streaming Data Platform

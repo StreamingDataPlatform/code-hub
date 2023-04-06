@@ -4,7 +4,7 @@ category: "Demos"
 tags: [pravega, java, ingest, flink, cuda, tensorflow]
 subtitle: Dell EMC Streaming Data Analytics - Hands-on
 technologies: [SDP]
-img: post/object detection/architecture.png
+img: object-detection/architecture.png
 license: Apache
 support: Community
 author:
@@ -28,7 +28,7 @@ Hands-on lab to demo how to store, process, read, analyze video on Streaming Dat
 - [Tensorflow](https://www.tensorflow.org/): The core open source library to help develop and train ML models.
 
 ## Demo environment
-![Demo env]({{site.baseurl}}/assets/heliumjk/images/post/object detection/architecture.png)
+![Demo env]({{site.baseurl}}/assets/images/posts/object-detection/architecture.png)
 
 
 ## Workload Flow

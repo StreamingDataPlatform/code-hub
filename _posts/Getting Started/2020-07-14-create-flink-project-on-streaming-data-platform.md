@@ -4,7 +4,7 @@ category: "Getting Started"
 tags: [flink, java, sdp, pravega]
 subtitle: "Create Projects and Flink Clusters on Dell EMC Streaming Data Platform"
 technologies: [SDP, Flink] 
-img: sdp.jpg
+img: flink-sdp-setup/sdp.jpg
 license: Apache
 support: Community
 author: 
@@ -26,11 +26,11 @@ Apache Flink is the embedded analytics engine in the Dell EMC Streaming Data Pla
 
 ##### 2. Create Projects
 **A.** Log in to the Dell EMC Streaming Data Platform and click the **Analytics** icon to navigate to the Analytics Projects view which lists the projects you have access to. 
-![Analytics-Project]({{site.baseurl}}/assets/heliumjk/images/post/flink-sdp-setup/analytics-project.png)
+![Analytics-Project]({{site.baseurl}}/assets/images/posts/flink-sdp-setup/analytics-project.png)
 **Note:** If you cannot log in to the Dell EMC Streaming Data Platform, please use ```kubectl get ingress -A``` to find all ingress and add to your **/etc/hosts** file.  
 
 **B.** Click **Create Project** button to start with a new project by typing the project name, description and required volume size. This action will also automatically create a scope or namespace for your project in Pravega. 
-![Create-Project]({{site.baseurl}}/assets/heliumjk/images/post/flink-sdp-setup/create-project.png)      
+![Create-Project]({{site.baseurl}}/assets/images/posts/flink-sdp-setup/create-project.png)      
 
 
 ##### 3. Upload Flink artifact to SDP
@@ -39,10 +39,10 @@ You must have all your artifact available on the SDP maven repository. There are
 
 ###### Option A: Using the Dell EMC Streaming Data Platform UI
 **I.** Navigate to **Analytics > Analytics Projects > *project-name* > Artifacts**
-![Artifact-UI]({{site.baseurl}}/assets/heliumjk/images/post/flink-sdp-setup/artifact-ui.png)
+![Artifact-UI]({{site.baseurl}}/assets/images/posts/flink-sdp-setup/artifact-ui.png)
 
 **II.** Click **Upload Artifact**. Under the **General** section, specify the **Maven Group**, the **Maven Artifact**, and enter the **Version number**. Under the **Artifact** File section, browse to the JAR file on your local machine and select the file to upload to the repository. 
-![Upload-Artifact]({{site.baseurl}}/assets/heliumjk/images/post/flink-sdp-setup/upload-artifact.png)
+![Upload-Artifact]({{site.baseurl}}/assets/images/posts/flink-sdp-setup/upload-artifact.png)
 
 ###### Option B: Using the Gradle Build Tool
 **I.** Make the Maven repo in SDP available to your development workstation. Use `kubectl ingress` command to get the host and IP address for your namespace repo.
@@ -123,16 +123,16 @@ export MAVEN_PASSWORD=**********
 
 #####  <span style="color:#0076ce">Option A: Using Dell EMC Streaming Data Platform UI</span> 
 **I.** To create a Flink cluster using the Dell EMC Streaming Data Platform UI, navigate to **Analytics -> *project-name* > Flink Clusters**.  
-![Flink-Cluster]({{site.baseurl}}/assets/heliumjk/images/post/flink-sdp-setup/flink-cluster.png)
+![Flink-Cluster]({{site.baseurl}}/assets/images/posts/flink-sdp-setup/flink-cluster.png)
 
 **II.** Click **Create Flink Cluster** and complete the cluster configuration fields.
-![Create-Flink-Cluster]({{site.baseurl}}/assets/heliumjk/images/post/flink-sdp-setup/create-flink-cluster.png)
+![Create-Flink-Cluster]({{site.baseurl}}/assets/images/posts/flink-sdp-setup/create-flink-cluster.png)
 
 **III.** Navigate to **Analytics > Analytics Projects > *project-name* > Apps**
-![App-UI]({{site.baseurl}}/assets/heliumjk/images/post/flink-sdp-setup/app.png)
+![App-UI]({{site.baseurl}}/assets/images/posts/flink-sdp-setup/app.png)
 
 **IV.**  Click **Create New App**. Specify the application name, the artifact source, main class, and other configuration information. You also have the chance to create a new Pravega stream for your application.
-![Create-App]({{site.baseurl}}/assets/heliumjk/images/post/flink-sdp-setup/create-app.png)
+![Create-App]({{site.baseurl}}/assets/images/posts/flink-sdp-setup/create-app.png)
 
 #####  <span style="color:#0076ce">Option B: Using Helm Chart to deploy the application</span> 
 
@@ -233,7 +233,7 @@ helm upgrade --install --timeout 600s --wait \
 
 ##### 5. Check Project Status
 **A.** Navigate to **Analytics > Analytics Projects > *project-name***. Use the links at the top of the project dashboard to view Apache Flink clusters, applications, and artifacts associated with the project.
-![Dashboard-UI]({{site.baseurl}}/assets/heliumjk/images/post/flink-sdp-setup/dashboard.png)
+![Dashboard-UI]({{site.baseurl}}/assets/images/posts/flink-sdp-setup/dashboard.png)
 
 
 ## Source

@@ -4,7 +4,7 @@ category: "Demos"
 tags: [pravega, java, ingest, flink]
 subtitle: Dell EMC Streaming Data Analytics - Hands-on
 technologies: [SDP]
-img: post/video processing/architecture.png
+img: video-processing/architecture.png
 license: Apache
 support: Community
 author:
@@ -25,7 +25,7 @@ Hands-on lab to demo how to store, process, and read video on Streaming Data Pla
 - [Docker](https://en.wikipedia.org/wiki/Docker_\(software\)): This demo uses Docker and Docker Compose to greatly simplify the deployment of the various components on Linux and/or Windows servers, desktops, or even laptops.
 
 ## Demo environment
-![Demo env]({{site.baseurl}}/assets/heliumjk/images/post/video processing/architecture.png)
+![Demo env]({{site.baseurl}}/assets/images/posts/video-processing/architecture.png)
 
 ## Workload Flow
 1. Camera recorder collects video feed and sends it into a stream
