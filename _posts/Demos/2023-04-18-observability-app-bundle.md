@@ -4,7 +4,7 @@ category: Demos
 tags: [pravega, flink, gateway, telegraf]
 subtitle: Dell Streaming Data Analytics - Hands-on
 technologies: [SDP]
-img: post/distance-calculator-sdp/architecture.png
+img: observability-app-bundle/Architecture-Design.png
 license: MIT
 author: 
     name: Adwaith Moothezhath, Virendra Rajpurohit 
@@ -13,6 +13,8 @@ author:
 css: 
 js: 
 ---
+
+This post shows how SDP can ingest multiple data streams, transform them, and power real-time dashboards/alerts.
 <!--more-->
 
 # FOIT-90 Observability App bundle: Customer Jumpstart on SDP Demo
