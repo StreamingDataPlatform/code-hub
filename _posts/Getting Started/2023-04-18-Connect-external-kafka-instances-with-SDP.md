@@ -31,7 +31,7 @@ Both applications demonstrate the usage of Kafka streams to read and write data 
 
 ## Instructions
 ##### 1. In order to read/write data to a kafka stream, an Analytics Project must be created on SDP as following (project name may vary): 
-![Analytics-Project]({{site.baseurl}}/assets/images/posts/sdp-kafka/sdp-landing.png)
+![Analytics-Project]({{site.baseurl}}/assets/images/posts/sdp-kafka/sdp-project.png)
 
 
 ##### 2. Create the application using Flink/spark jobs on Dell EMC Streaming Data Platform that connects to external Kafka instance to read and write data streams. For more detailed instructions, please refer [sdp-kafka-streaming repository](https://github.com/StreamingDataPlatform/sdp-kafka-streaming).
