@@ -9,7 +9,7 @@ license: MIT
 author: 
     name: Adwaith Moothezhath, Virendra Rajpurohit 
     description: We are SDP app developers.
-    image:
+    image: spiderman-ironman.jpg
 css: 
 js: 
 ---
@@ -81,6 +81,8 @@ The End-to-End flow of this code sample can be thought of like this:
 The user master yaml file is the main file used to setup everything for this project for the user. This yaml file contains multiple options that users can customize for the project. To view the master yaml file go into the **telcom-demo-app-bundle** folder and open the **sample.yaml** file. Areas where the user can customize the master yaml file are:
 
 1. Project Name: The user can change the project name to their choice. The default project name provided is **examples**. Important naming convention: The name can be a max length of 15 characters, consist of lower-case alphanumeric characters or '-', and must start and end with an alphanumeric character.
+
+2. Storage Class Name: The user **must** change the storage class name to their storage class name on kubernetes. To find out your default storageClassName run **kubectl get storageclass**
 ```
 global:
   projectName: examples # User can change to any project name default project name is examples 
@@ -92,11 +94,11 @@ global:
         clients:
         - default
         mapping:
-          default:
+  storageClassName: standard
 ```
 _Figure 2: User Master Yaml file Project Name_
 
-1. Data Sinks: The user can add outputs as data sinks which Telegraf can output data to. Default outputs are set to **influxDB**, and HTTP is used by the Pravega rest gateway. To add new outputs, see the Telegraf output plugins. 
+3. Data Sinks: The user can add outputs as data sinks which Telegraf can output data to. Default outputs are set to **influxDB**, and HTTP is used by the Pravega rest gateway. To add new outputs, see the Telegraf output plugins. 
 at [https://docs.influxdata.com/telegraf/v1.14/plugins/plugin-list/](https://docs.influxdata.com/telegraf/v1.14/plugins/plugin-list/).
 
 ```
@@ -120,7 +122,7 @@ at [https://docs.influxdata.com/telegraf/v1.14/plugins/plugin-list/](https://doc
 ```
 _Figure 3: Telegraf Outputs_
 
-1. Data Sources: The user can add inputs as data sources which Telegraf can read data from. The default inputs in this project **must be changed** by the user to point to their data sources. This project implements 3 inputs as default. They are **k8s**,**idrac** and **vsphere**, shown in Figure 4, 5 and 6. The input format is shown in Figure 8 below.
+4. Data Sources: The user can add inputs as data sources which Telegraf can read data from. The default inputs in this project **must be changed** by the user to point to their data sources. This project implements 3 inputs as default. They are **k8s**,**idrac** and **vsphere**, shown in Figure 4, 5 and 6. The input format is shown in Figure 8 below.
 
 ```
     Inputs:
@@ -175,7 +177,7 @@ _Figure 5: Input with stream name idrac, Not pushing data to prometheus, and dat
 
 _Figure 6: Input with stream name vsphere, Not pushing data to prometheus, and data source input is vsphere vcenter_
 
-1. Flink Jobs: The user can add the Flink Jobs they want to run. The default Flink jobs are **install_map_metrics** and **install_map_metrics_dashboards**, which create Grafana dashboards shown in Figure 7. These Flink jobs are written in Java. To view them, go into the folder **flinkprocessor/src/main/java/io/pravega/flinkprocessor**. The input format is shown in Figure 9 below.
+5. Flink Jobs: The user can add the Flink Jobs they want to run. The default Flink jobs are **install_map_metrics** and **install_map_metrics_dashboards**, which create Grafana dashboards shown in Figure 7. These Flink jobs are written in Java. To view them, go into the folder **flinkprocessor/src/main/java/io/pravega/flinkprocessor**. The input format is shown in Figure 9 below.
 
 ```
   flinkJobs:
@@ -189,9 +191,9 @@ _Figure 7: Default Flink Jobs for this project_
 
 1. **Setting up the code sample:**
 
-1. Clone the GitHub repo on your local machine.
-2. Go into the **telcom-demo-app-bundle** folder and open the **sample.yaml** file.
-3. Under **global.streams[0].Inputs** change the inputs to your data sources, use current Inputs as reference. For each input include the name of the stream, prometheusCheck, and input to your data source. An example of an input template is:
+    1. Clone the GitHub repo on your local machine.
+    2. Go into the **telcom-demo-app-bundle** folder and open the **sample.yaml** file.
+    3. Under **global.streams[0].Inputs** change the inputs to your data sources, use current Inputs as reference. For each input include the name of the stream, prometheusCheck, and input to your data source. An example of an input template is:
 
 ```
 input<number>:
@@ -276,6 +278,9 @@ _Figure 10: Flink Job Template_
 - Line 29 in the install script is commented out when first installing. If you are running install script again uncomment line 29 #sudo keytool -delete -noprompt -alias sdp-repo  -keystore /etc/ssl/certs/java/cacerts -storepass changeit
 - If there is error with openssl importing java certs go to the file: **/etc/hosts** and delete the **repo-<projectName>.<clusterinfo>.sdp.hop.lab.emc.com** near the top of the file.
 - In the charts folder map-metrics-influxdb-sink-values.yaml and map-metrics-values.yaml have storageClassName set to standard. Change it to your storageClassName. To find out your default storageClassName run **kubectl get storageclass**
+- In the charts folder map-metrics-influxdb-sink-values.yaml and map-metrics-values.yaml make sure to have supported flink images. To find supported flink images go to the SDP UI and open the System tab and under the Runtimes tab, the supported flink versions will be available. 
+- If telegraf pods fail to get created and there is an image issue it is because Docker rate limit has been reached. To resolve this build the telegraf image from the docker file. https://hub.docker.com/_/telegraf 
+
 
 ## Source
 [https://github.com/StreamingDataPlatform/telcom-demo-app-bundle](https://github.com/StreamingDataPlatform/telcom-demo-app-bundle)
