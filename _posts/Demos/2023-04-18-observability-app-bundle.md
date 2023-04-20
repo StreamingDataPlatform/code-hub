@@ -1,7 +1,7 @@
 ---
 layout: post
 category: Demos
-tags: [pravega, flink, gateway, telegraf]
+tags: [pravega, flink, gateway, telegraf,influxdb,grafana]
 subtitle: Dell Streaming Data Analytics - Hands-on
 technologies: [SDP]
 img: observability-app-bundle/Architecture-Design.png
@@ -59,12 +59,12 @@ The data source and Telegraf agent is set outside of SDP and the Pravega ingest 
 
 The End-to-End flow of this code sample can be thought of like this:
 
-1. First the Telegraf agent collects data from different input systems which the user can configure.
-2. The Telegraf agent then outputs the data to the Pravega rest gateway, which is a rest API endpoint.
-3. The Pravega REST gateway receives the data and writes it into the individual Pravega streams.
-4. After deploying our example transformation Flink Jobs (can be anything provided by the user), the Flink jobs read the data from the Pravega streams and execute the Job.
-5. In this example, the example job provided by the application will read the stream data and run the map metrics job and then write the results out to Influx and create a new stream with combined idrac, vsphere and k8s data.
-6. Finally, the results can be shown on the Grafana dashboards (deployed by the sample code)
+- First the Telegraf agent collects data from different input systems which the user can configure.
+- The Telegraf agent then outputs the data to the Pravega rest gateway, which is a rest API endpoint.
+- The Pravega REST gateway receives the data and writes it into the individual Pravega streams.
+- After deploying our example transformation Flink Jobs (can be anything provided by the user), the Flink jobs read the data from the Pravega streams and execute the Job.
+- In this example, the example job provided by the application will read the stream data and run the map metrics job and then write the results out to Influx and create a new stream with combined idrac, vsphere and k8s data.
+- Finally, the results can be shown on the Grafana dashboards (deployed by the sample code)
 
 ## <u>Instructions</u>
 
@@ -80,9 +80,9 @@ The End-to-End flow of this code sample can be thought of like this:
 
 The user master yaml file is the main file used to setup everything for this project for the user. This yaml file contains multiple options that users can customize for the project. To view the master yaml file go into the **telcom-demo-app-bundle** folder and open the **sample.yaml** file. Areas where the user can customize the master yaml file are:
 
-1. Project Name: The user can change the project name to their choice. The default project name provided is **examples**. Important naming convention: The name can be a max length of 15 characters, consist of lower-case alphanumeric characters or '-', and must start and end with an alphanumeric character.
+- Project Name: The user can change the project name to their choice. The default project name provided is **examples**. Important naming convention: The name can be a max length of 15 characters, consist of lower-case alphanumeric characters or '-', and must start and end with an alphanumeric character.
 
-2. Storage Class Name: The user **must** change the storage class name to their storage class name on kubernetes. To find out your default storageClassName run **kubectl get storageclass**
+- Storage Class Name: The user **must** change the storage class name to their storage class name on kubernetes. To find out your default storageClassName run **kubectl get storageclass**
 ```
 global:
   projectName: examples # User can change to any project name default project name is examples 
@@ -98,7 +98,7 @@ global:
 ```
 _Figure 2: User Master Yaml file Project Name_
 
-3. Data Sinks: The user can add outputs as data sinks which Telegraf can output data to. Default outputs are set to **influxDB**, and HTTP is used by the Pravega rest gateway. To add new outputs, see the Telegraf output plugins. 
+- Data Sinks: The user can add outputs as data sinks which Telegraf can output data to. Default outputs are set to **influxDB**, and HTTP is used by the Pravega rest gateway. To add new outputs, see the Telegraf output plugins. 
 at [https://docs.influxdata.com/telegraf/v1.14/plugins/plugin-list/](https://docs.influxdata.com/telegraf/v1.14/plugins/plugin-list/).
 
 ```
@@ -122,7 +122,7 @@ at [https://docs.influxdata.com/telegraf/v1.14/plugins/plugin-list/](https://doc
 ```
 _Figure 3: Telegraf Outputs_
 
-4. Data Sources: The user can add inputs as data sources which Telegraf can read data from. The default inputs in this project **must be changed** by the user to point to their data sources. This project implements 3 inputs as default. They are **k8s**,**idrac** and **vsphere**, shown in Figure 4, 5 and 6. The input format is shown in Figure 8 below.
+- Data Sources: The user can add inputs as data sources which Telegraf can read data from. The default inputs in this project **must be changed** by the user to point to their data sources. This project implements 3 inputs as default. They are **k8s**,**idrac** and **vsphere**, shown in Figure 4, 5 and 6. The input format is shown in Figure 8 below.
 
 ```
     Inputs:
@@ -177,7 +177,7 @@ _Figure 5: Input with stream name idrac, Not pushing data to prometheus, and dat
 
 _Figure 6: Input with stream name vsphere, Not pushing data to prometheus, and data source input is vsphere vcenter_
 
-5. Flink Jobs: The user can add the Flink Jobs they want to run. The default Flink jobs are **install_map_metrics** and **install_map_metrics_dashboards**, which create Grafana dashboards shown in Figure 7. These Flink jobs are written in Java. To view them, go into the folder **flinkprocessor/src/main/java/io/pravega/flinkprocessor**. The input format is shown in Figure 9 below.
+- Flink Jobs: The user can add the Flink Jobs they want to run. The default Flink jobs are **install_map_metrics** and **install_map_metrics_dashboards**, which create Grafana dashboards shown below. These Flink jobs are written in Java. To view them, go into the folder **flinkprocessor/src/main/java/io/pravega/flinkprocessor**. The input format is shown in Figure 10 below.
 
 ```
   flinkJobs:
@@ -189,11 +189,11 @@ _Figure 7: Default Flink Jobs for this project_
 
 ## Steps of Installation:
 
-1. **Setting up the code sample:**
+- **Setting up the code sample:**
 
-    1. Clone the GitHub repo on your local machine.
-    2. Go into the **telcom-demo-app-bundle** folder and open the **sample.yaml** file.
-    3. Under **global.streams[0].Inputs** change the inputs to your data sources, use current Inputs as reference. For each input include the name of the stream, prometheusCheck, and input to your data source. An example of an input template is:
+    - Clone the GitHub repo on your local machine.
+    - Go into the **telcom-demo-app-bundle** folder and open the **sample.yaml** file.
+    - Under **global.streams[0].Inputs** change the inputs to your data sources, use current Inputs as reference. For each input include the name of the stream, prometheusCheck, and input to your data source. An example of an input template is:
 
 ```
 input<number>:
@@ -203,7 +203,7 @@ input<number>:
 ```
 _Figure 8: Telegraf Input template_
 
-2. **Run default Flink Jobs**
+#### Run default Flink Jobs:
 
 - If the user wants to run the existing Flink jobs: Map Metrics and Map Metrics Dashboard, the user can add **install_map_metrics** and **install_map_metrics_dashboard** under **global.flinkJobs**. If the user adds new inputs which are different from idrac, vsphere and k8s they would need to create a new Flink job or update map metrics code for the new streams. The user can also choose to add any metric to the output stream(mappedMetrics) which gets created when running the Flink job map by updating the MapMetrics.java file.
 
@@ -215,7 +215,7 @@ _Figure 8: Telegraf Input template_
 
 _Figure 9: Default Flink Jobs created for this project_
 
-3. **Create your own Flink Jobs**
+#### Create your own Flink Jobs:
 
 - If the user wants to add their own Flink Jobs, they can add a name in this format under flinkJobs:
 
@@ -228,26 +228,29 @@ _Figure 10: Flink Job Template_
 
 - Next, go into the folder **charts** and create a new folder with the yaml files for the new Flink job. Use **map-metrics** as reference when creating new Flink job yaml files.
 - Next, go into the folder **scripts** and create a new shell script with the same name provided under flinkJobs. Use  **install_map_metrics.sh**  as reference when creating a new script.
-- Finally, if the user wants to send data to influxDB, go into the folder **scripts** and **flinkJobSetup.py**  and modify the script to update influxdb details. Refer to the code block #updating map-metrics-values.yaml influxdb details in the flinkJobSetup.py for reference.
+- Finally, if the user wants to send data to influxDB, go into the folder **scripts** and **flinkJobSetup.py** and modify the script to update influxdb details. Refer to the code block #updating map-metrics-values.yaml influxdb details in the flinkJobSetup.py for reference.
 
-4. **Install the Project**
+#### Install the Project:
 
 - Finally, after the **sample.yaml** file has been configured to add inputs and create new Flink jobs or use the default ones provided, run the install shell script.
 - To run the **install.sh** script go to **telcom-demo-app-bundle** folder and run the command  **./install.sh**. This sets up the project with the streams provided from the input and runs Flink jobs.
 
-5. **Steps of Demo Running**
+#### Steps of Demo Running:
 
 - After running the install.sh shell script, check if a project named examples got created in the SDP UI. 
 
 ![SDP project UI]({{site.baseurl}}/assets/images/posts/observability-app-bundle/SDPexampleProject.png)
 
+
 - Check if Pravega streams got created for the project. For this example, we have 3 streams idrac, vsphere and k8s which were configured in the master yaml file. Also, the mappedMetrics stream was created automatically after running Flink job map metrics.
 
 ![SDP project Pravega streams]({{site.baseurl}}/assets/images/posts/observability-app-bundle/SDPexamplePravegaStreams.png)
 
+
 - Check if flinkprocessor artifact was uploaded in SDP. 
 
 ![SDP Flink processor artifact]({{site.baseurl}}/assets/images/posts/observability-app-bundle/SDPexampleFlinkProcessorArtifact.png)
+
 
 - Check if Flink cluster and apps got created in SDP. 
 
@@ -255,9 +258,11 @@ _Figure 10: Flink Job Template_
 
 ![SDP Flink apps]({{site.baseurl}}/assets/images/posts/observability-app-bundle/SDPexampleFlinkApps.png)
 
+
 - Finally go to features and go to the Metrics endpoint and check if Grafana dashboards are loaded with data. 
 
 ![Grafana Dashboard]({{site.baseurl}}/assets/images/posts/observability-app-bundle/grafanadashboardOverview.png)
+
 
 - Screenshot below shows the VMware vSphere – Hosts dashboard with all the live data 
 
@@ -265,19 +270,19 @@ _Figure 10: Flink Job Template_
 
 ## Uninstall Project
 
-- First find all streams created by Telegraf using the command: kubectl get pods -n <projectname>. An example of idrac, vsphere and k8s are shown below.
+- First find all streams created by Telegraf using the command: kubectl get pods -n "projectname". An example of idrac, vsphere and k8s are shown below.
 
 ![pravega example streams]({{site.baseurl}}/assets/images/posts/observability-app-bundle/pravegaExampleStreams.png)
 
 
-- Stop each stream that has "telegraf" using the command: helm del <podname> -n <projectname>
-- Delete the Flink jobs/cluster, Pravega streams and project in that order from the SDP UI or create update the uninstall.sh shell script with the new streams and run it.
+- Stop each stream that has "telegraf" using the command: helm del "podname" -n "projectname"
+- Delete the Flink jobs/cluster, Pravega streams and project in that order from the SDP UI or update the uninstall.sh shell script with the new streams and run it.
 
 ## Troubleshooting
 
 - Line 29 in the install script is commented out when first installing. If you are running install script again uncomment line 29 #sudo keytool -delete -noprompt -alias sdp-repo  -keystore /etc/ssl/certs/java/cacerts -storepass changeit
-- If there is error with openssl importing java certs go to the file: **/etc/hosts** and delete the **repo-<projectName>.<clusterinfo>.sdp.hop.lab.emc.com** near the top of the file.
-- In the charts folder map-metrics-influxdb-sink-values.yaml and map-metrics-values.yaml have storageClassName set to standard. Change it to your storageClassName. To find out your default storageClassName run **kubectl get storageclass**
+- If there is error with openssl importing java certs go to the file: **/etc/hosts** and delete the **repo-"projectName"."clusterinfo".sdp.hop.lab.emc.com** near the top of the file.
+- If the Flink job is not running make sure in the sample yaml file the storageClassName is set to your storage class name. To find out your default storageClassName run **kubectl get storageclass**
 - In the charts folder map-metrics-influxdb-sink-values.yaml and map-metrics-values.yaml make sure to have supported flink images. To find supported flink images go to the SDP UI and open the System tab and under the Runtimes tab, the supported flink versions will be available. 
 - If telegraf pods fail to get created and there is an image issue it is because Docker rate limit has been reached. To resolve this build the telegraf image from the docker file. https://hub.docker.com/_/telegraf 
 
