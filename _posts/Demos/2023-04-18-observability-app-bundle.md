@@ -8,7 +8,7 @@ img: observability-app-bundle/Architecture-Design.png
 license: MIT
 author: 
     name: Adwaith Moothezhath, Virendra Rajpurohit 
-    description: We are Streaming Data Platform app developers.
+    description: We are SDP app developers.
     image: spiderman-ironman.jpg
 css: 
 js: 
@@ -17,7 +17,7 @@ js:
 This post shows how SDP can ingest multiple data streams, transform them, and power real-time dashboards/alerts.
 <!--more-->
 
-# Observability App bundle: Customer Jumpstart on SDP Demo
+# FOIT-90 Observability App bundle: Customer Jumpstart on SDP Demo
 
 **Observability Application on SDP**
 
