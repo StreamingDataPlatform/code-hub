@@ -73,7 +73,7 @@ The End-to-End flow of this code sample can be thought of like this:
 - Python 3
 - Helm v2 or later
 - Gradle 7.2
-- SDP installed and setup
+- SDP v1.6 or later
 - Java 11
 
 ## Preparation of User master yaml file:
