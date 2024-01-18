@@ -87,8 +87,8 @@ The camera recorder pipeline, Pravega video server and InfluxDB are built-in SDP
     | Id          |        Components          |  Image          |
     | ----------- | -------------------------- | --------------- | 
     | 1           | RTSP camera simulator      | ghcr.io/streamingdataplatform/sdp-video-demos-rtsp-simulator:latest      |
-    | 2           | Grafana                    | ghcr.io/streamingdataplatform/sdp-video-demos- grafana:latest            |
-    | 3           | Human Detection Pipeline   | ghcr.io/streamingdataplatform/sdp-video-demos dlstreamer-pipeline:latest |
+    | 2           | Grafana                    | ghcr.io/streamingdataplatform/sdp-video-demos-grafana:latest             |
+    | 3           | Human Detection Pipeline   | ghcr.io/streamingdataplatform/sdp-video-demos-dlstreamer-pipeline:latest |
 
 2. Prepare installation script
     - Clone the [sdp-video-demo repo](https://github.com/StreamingDataPlatform/sdp-video-demos) on your local machine.
