@@ -10,7 +10,7 @@ so long as they meet the guidelines provided below and pass the review process.
 The following sections describe the necessary process to add a post to the code hub site.
 
 ## Fork and PR
-To add a post, you will need to fork this repository, and create a branch based on the head of the **gh-pages** branch.  When you are ready to submit your post, create a PR to this repository targeting the **gh-pages** branch.  The only addition that should be made in the PR is a single post file. 
+To add a post, you will need to fork this repository, and create a branch based on the head of the **master** branch.  When you are ready to submit your post, create a PR to this repository targeting the **master** branch.  The only addition that should be made in the PR is a single post file. 
 
 ## The Post File
 To create a post, add a file under the `_posts` directory (in the appropriate category subdirectory) with the following format:
